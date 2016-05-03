@@ -5,9 +5,17 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
   let menuTableViewCellId = "MenuTableViewCell"
   let addTableViewCellId = "AddReminderTableViewCell"
   let reminderViewControllerId = "ReminderViewController"
-    var finalResult: [String] = []
+    var mainDescription: [String] = []
+    var mainTitle: String?
     var numberOfRows = 0
 
+    @IBOutlet var mainTableView: UITableView!
+    
+    override func viewDidLoad() {
+        mainTableView.delegate=self
+        mainTableView.dataSource=self
+    }
+    
   override func tableView(
     tableView: UITableView,
     numberOfRowsInSection section: Int) -> Int {
@@ -26,21 +34,19 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
         cell = tableView.dequeueReusableCellWithIdentifier(menuTableViewCellId)
         
         if let cell = cell {
-            cell.textLabel?.text = "John"
-            cell.detailTextLabel?.text = finalResult[indexPath.row]
+            cell.textLabel?.text = mainTitle
+            cell.detailTextLabel?.text = mainDescription[indexPath.row]
         }
       }
-
       return cell!
   }
     
-    
-
   override func tableView(
     tableView: UITableView,
     didSelectRowAtIndexPath indexPath: NSIndexPath) {
       tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier=="modalSegue"{
             let modalView: ModalReminderViewController = segue.destinationViewController as! ModalReminderViewController
@@ -48,8 +54,11 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
         }
     }
     
-    func passDataModalView(result: [String]) {
-        finalResult = result
+    func passDataModalView(result: [String],title: String) {
+        mainDescription = result
+        mainTitle=title
+        numberOfRows=mainDescription.count
+        mainTableView.reloadData()
     }
 
 }

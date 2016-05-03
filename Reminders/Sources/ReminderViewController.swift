@@ -1,7 +1,7 @@
 //  Copyright © 2016 HB. All rights reserved.
 protocol ReminderViewControllerDelegate
 {
-    func passData(content: [String])
+    func passData(content: [String],title: String)
 }
 
 class ReminderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -12,7 +12,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
   let taskTableViewCellIdentifier = "TaskTableViewCell"
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
     var delegate: ReminderViewControllerDelegate? = nil
-    var result: [String] = []
+    var descriptionArray: [String] = []
 
   var numberOfRows = 0
 
@@ -68,10 +68,10 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
         
         for cell in tasksTableView.visibleCells {
             if let cellTemp = cell as? TaskTableViewCell{
-                result.append(cellTemp.txtDescription.text!)
+                descriptionArray.append(cellTemp.txtDescription.text!)
             }
         }
-        delegate?.passData(result)
+        delegate?.passData(descriptionArray,title: titleTextField.text!)
     }
 
 }

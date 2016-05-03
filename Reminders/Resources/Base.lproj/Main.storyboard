@@ -77,6 +77,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Reminders" id="VqZ-Ug-bYB"/>
+                    <connections>
+                        <outlet property="mainTableView" destination="BZq-pL-dgx" id="bZS-HJ-2tS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F6F-ek-s5i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

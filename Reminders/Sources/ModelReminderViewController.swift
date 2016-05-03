@@ -1,13 +1,13 @@
 //  Copyright © 2016 HB. All rights reserved.
 
 protocol ModalReminderViewControllerDelegate {
-    func passDataModalView(result: [String])
+    func passDataModalView(result: [String],title: String)
 }
 
 class ModalReminderViewController: UIViewController, ReminderViewControllerDelegate {
     
     var delegate: ModalReminderViewControllerDelegate? = nil
-    var resultsModalView: [String] = []
+    var descriptionModalView: [String] = []
 
   @IBAction func addButtonPressed(sender: AnyObject) {
     dismissViewControllerAnimated(true, completion: nil)
@@ -19,9 +19,9 @@ class ModalReminderViewController: UIViewController, ReminderViewControllerDeleg
         }
     }
     
-    func passData(content: [String]) {
-        resultsModalView = content
-        delegate?.passDataModalView(resultsModalView)
+    func passData(content: [String],title: String) {
+        descriptionModalView = content
+        delegate?.passDataModalView(descriptionModalView,title: title)
     }
 }
 
