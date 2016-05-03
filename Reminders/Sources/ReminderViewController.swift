@@ -1,4 +1,8 @@
 //  Copyright © 2016 HB. All rights reserved.
+protocol ReminderViewControllerDelegate
+{
+    func passData(content: [String])
+}
 
 class ReminderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -7,6 +11,8 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
 
   let taskTableViewCellIdentifier = "TaskTableViewCell"
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
+    var delegate: ReminderViewControllerDelegate? = nil
+    var result: [String] = []
 
   var numberOfRows = 0
 
@@ -35,6 +41,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
       switch indexPath.row {
       case 0 where numberOfRows == 0, numberOfRows:
         cell = tableView.dequeueReusableCellWithIdentifier(addTaskTableViewCellIdentifier)
+        
       default:
         cell = tableView.dequeueReusableCellWithIdentifier(taskTableViewCellIdentifier)
       }
@@ -55,6 +62,17 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
 
       tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
+    
+    override func viewDidDisappear(animated: Bool) {
+        //let cells = tasksTableView.visibleCells as! Array<TaskTableViewCell>
+        
+        for cell in tasksTableView.visibleCells {
+            if let cellTemp = cell as? TaskTableViewCell{
+                result.append(cellTemp.txtDescription.text!)
+            }
+        }
+        delegate?.passData(result)
+    }
 
 }
 

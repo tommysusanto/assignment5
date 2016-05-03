@@ -4,6 +4,8 @@ class TaskTableViewCell: UITableViewCell {
 
   var completed = false
 
+    @IBOutlet weak var txtDescription: UITextField!
+    
   @IBAction func radioButtonPressed(sender: AnyObject) {
     if let button = sender as? UIButton {
       button.setImage(
