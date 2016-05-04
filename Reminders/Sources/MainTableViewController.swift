@@ -1,6 +1,6 @@
 //  Copyright © 2016 HB. All rights reserved.
 
-class MainTableViewController: UITableViewController, ModalReminderViewControllerDelegate {
+class MainTableViewController: UITableViewController, ModalReminderViewControllerDelegate,PushReminderViewControllerDelegate {
 
   let menuTableViewCellId = "MenuTableViewCell"
   let addTableViewCellId = "AddReminderTableViewCell"
@@ -52,6 +52,20 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
             let modalView: ModalReminderViewController = segue.destinationViewController as! ModalReminderViewController
             modalView.delegate = self
         }
+        else if segue.identifier=="pushSegue"{
+            let pushView: PushReminderViewController = segue.destinationViewController as! PushReminderViewController
+            pushView.delegate = self
+        }
+        
+    }
+    
+    func passDataPushView(result: [String], title: String) {
+        for element in result {
+            mainDescription.append(element)
+            mainTitle.append(title)
+        }
+        numberOfRows=mainDescription.count
+        mainTableView.reloadData()
     }
     
     func passDataModalView(result: [String],title: String) {

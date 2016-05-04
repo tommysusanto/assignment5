@@ -17,6 +17,7 @@
 		271824B31CD67B3B00BFB779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 271824AF1CD67B3B00BFB779 /* LaunchScreen.storyboard */; };
 		271824B41CD67B3B00BFB779 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 271824B11CD67B3B00BFB779 /* Main.storyboard */; };
 		27BE5F691CCF97BE008EB95E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BE5F681CCF97BE008EB95E /* AppDelegate.swift */; };
+		3E52B96C1CD9FC0900B7C62A /* PushReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E52B96B1CD9FC0900B7C62A /* PushReminderViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		271824B51CD67B7900BFB779 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27BE5F651CCF97BE008EB95E /* Reminders.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminders.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27BE5F681CCF97BE008EB95E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3E52B96B1CD9FC0900B7C62A /* PushReminderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushReminderViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		271824951CD64C3500BFB779 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				3E52B96B1CD9FC0900B7C62A /* PushReminderViewController.swift */,
 				271824A91CD67ABF00BFB779 /* ModelReminderViewController.swift */,
 				271824AA1CD67ABF00BFB779 /* ReminderViewController.swift */,
 				271824AB1CD67ABF00BFB779 /* TaskTableViewCell.swift */,
@@ -192,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E52B96C1CD9FC0900B7C62A /* PushReminderViewController.swift in Sources */,
 				271824AE1CD67ABF00BFB779 /* TaskTableViewCell.swift in Sources */,
 				271824941CD64C2D00BFB779 /* MainTableViewController.swift in Sources */,
 				271824A71CD67AB000BFB779 /* Reminder.swift in Sources */,
