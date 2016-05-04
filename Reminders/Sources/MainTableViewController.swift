@@ -6,7 +6,7 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
   let addTableViewCellId = "AddReminderTableViewCell"
   let reminderViewControllerId = "ReminderViewController"
     var mainDescription: [String] = []
-    var mainTitle: String?
+    var mainTitle: [String] = []
     var numberOfRows = 0
 
     @IBOutlet var mainTableView: UITableView!
@@ -34,7 +34,7 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
         cell = tableView.dequeueReusableCellWithIdentifier(menuTableViewCellId)
         
         if let cell = cell {
-            cell.textLabel?.text = mainTitle
+            cell.textLabel?.text = mainTitle[indexPath.row]
             cell.detailTextLabel?.text = mainDescription[indexPath.row]
         }
       }
@@ -55,8 +55,10 @@ class MainTableViewController: UITableViewController, ModalReminderViewControlle
     }
     
     func passDataModalView(result: [String],title: String) {
-        mainDescription = result
-        mainTitle=title
+        for element in result {
+            mainDescription.append(element)
+            mainTitle.append(title)
+        }
         numberOfRows=mainDescription.count
         mainTableView.reloadData()
     }

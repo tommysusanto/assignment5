@@ -11,7 +11,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
 
   let taskTableViewCellIdentifier = "TaskTableViewCell"
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
-    var delegate: ReminderViewControllerDelegate? = nil
+    var delegate: ReminderViewControllerDelegate?
     var descriptionArray: [String] = []
 
   var numberOfRows = 0
