@@ -13,7 +13,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
     var delegate: ReminderViewControllerDelegate?
     
-    var reminderArray: [Reminder] = []
+    var reminderArray: Reminder = []
     
     var descriptionArray: [String] = []
     var titleText: [String] = []
@@ -85,7 +85,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
                 taskTempArray.append(taskTemp)
             }
         }
-        let reminderTemp:Reminder = Reminder(title: titleTextField.text!, tasks: <#T##[Task]#>)
+        let reminderTemp:Reminder = Reminder(title: titleTextField.text!, tasks: taskTempArray)
         if titleText.count != 0 && descriptionArray.count != 0 {
             delegate?.passData(reminderArray)
         }
