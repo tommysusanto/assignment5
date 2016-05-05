@@ -1,7 +1,7 @@
 //  Copyright © 2016 HB. All rights reserved.
 protocol ReminderViewControllerDelegate
 {
-    func passData(content: [String],title: [String],radio: [Bool])
+    func passData(reminder: [Reminder])
 }
 
 class ReminderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -13,7 +13,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
     var delegate: ReminderViewControllerDelegate?
     
-    var reminder: [Reminder] = []
+    var reminderArray: [Reminder] = []
     
     var descriptionArray: [String] = []
     var titleText: [String] = []
@@ -79,26 +79,15 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
         //let cells = tasksTableView.visibleCells as! Array<TaskTableViewCell>
         
         for cell in tasksTableView.visibleCells {
+            var taskTempArray: [Task] = []
             if let cellTemp = cell as? TaskTableViewCell{
-                var doesExists: Bool = false
-                for index1 in 0..<titleText.count{
-                    if titleText [index1] == titleTextField.text!{
-                        for index2 in 0..<descriptionArray.count{
-                            if descriptionArray[index2]==cellTemp.txtDescription.text!{
-                                doesExists = true
-                            }
-                        }
-                    }
-                }
-                if doesExists == false {
-                    descriptionArray.append(cellTemp.txtDescription.text!)
-                    titleText.append(titleTextField.text!)
-                    radioButtonArray.append(cellTemp.completed)
-                }
+                let taskTemp: Task = Task (completed: cellTemp.completed, description: cellTemp.txtDescription.text!)
+                taskTempArray.append(taskTemp)
             }
         }
+        let reminderTemp:Reminder = Reminder(title: titleTextField.text!, tasks: <#T##[Task]#>)
         if titleText.count != 0 && descriptionArray.count != 0 {
-            delegate?.passData(descriptionArray,title: titleText,radio: radioButtonArray)
+            delegate?.passData(reminderArray)
         }
     }
 }
