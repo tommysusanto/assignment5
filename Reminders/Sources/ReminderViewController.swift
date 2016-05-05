@@ -1,7 +1,7 @@
 //  Copyright © 2016 HB. All rights reserved.
 protocol ReminderViewControllerDelegate
 {
-    func passData(content: [String],title: String)
+    func passData(content: [String],title: [String],radio: [Bool])
 }
 
 class ReminderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -12,7 +12,13 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
   let taskTableViewCellIdentifier = "TaskTableViewCell"
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
     var delegate: ReminderViewControllerDelegate?
+    
+    var reminder: [Reminder] = []
+    
     var descriptionArray: [String] = []
+    var titleText: [String] = []
+    var radioButtonArray: [Bool] = []
+    var selectedTitle: String?
 
   var numberOfRows = 0
 
@@ -21,7 +27,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
   override func viewDidAppear(animated: Bool) {
     tasksTableView.delegate = self
     tasksTableView.dataSource = self
-
+    titleTextField.text=selectedTitle
     tasksTableView.reloadData()
   }
 
@@ -44,6 +50,12 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
         
       default:
         cell = tableView.dequeueReusableCellWithIdentifier(taskTableViewCellIdentifier)
+        let cell = cell as? TaskTableViewCell
+        let isIndexValid = descriptionArray.indices.contains(indexPath.row)
+        if isIndexValid == true{
+            cell?.txtDescription.text = descriptionArray[indexPath.row]
+            cell?.completed = radioButtonArray[indexPath.row]
+        }
       }
 
       return cell!
@@ -68,12 +80,27 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
         
         for cell in tasksTableView.visibleCells {
             if let cellTemp = cell as? TaskTableViewCell{
-                descriptionArray.append(cellTemp.txtDescription.text!)
+                var doesExists: Bool = false
+                for index1 in 0..<titleText.count{
+                    if titleText [index1] == titleTextField.text!{
+                        for index2 in 0..<descriptionArray.count{
+                            if descriptionArray[index2]==cellTemp.txtDescription.text!{
+                                doesExists = true
+                            }
+                        }
+                    }
+                }
+                if doesExists == false {
+                    descriptionArray.append(cellTemp.txtDescription.text!)
+                    titleText.append(titleTextField.text!)
+                    radioButtonArray.append(cellTemp.completed)
+                }
             }
         }
-        delegate?.passData(descriptionArray,title: titleTextField.text!)
+        if titleText.count != 0 && descriptionArray.count != 0 {
+            delegate?.passData(descriptionArray,title: titleText,radio: radioButtonArray)
+        }
     }
-
 }
 
 import UIKit

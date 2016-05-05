@@ -1,13 +1,14 @@
 //  Copyright © 2016 HB. All rights reserved.
 
 protocol ModalReminderViewControllerDelegate {
-    func passDataModalView(result: [String],title: String)
+    func passDataModalView(result: [String],title: [String],radio: [Bool])
 }
 
 class ModalReminderViewController: UIViewController, ReminderViewControllerDelegate {
     
     var delegate: ModalReminderViewControllerDelegate? = nil
     var descriptionModalView: [String] = []
+    var radioButtonModalView: [Bool] = []
 
   @IBAction func addButtonPressed(sender: AnyObject) {
     dismissViewControllerAnimated(true, completion: nil)
@@ -15,13 +16,14 @@ class ModalReminderViewController: UIViewController, ReminderViewControllerDeleg
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier=="sbSegueModal"{
             let reminderVC: ReminderViewController = segue.destinationViewController as! ReminderViewController
+            
             reminderVC.delegate = self
         }
     }
-    
-    func passData(content: [String],title: String) {
+    // Delegates
+    func passData(content: [String],title: [String],radio: [Bool]) {
         descriptionModalView = content
-        delegate?.passDataModalView(descriptionModalView,title: title)
+        delegate?.passDataModalView(descriptionModalView,title: title,radio: radio)
     }
 }
 

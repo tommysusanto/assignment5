@@ -10,24 +10,35 @@ import Foundation
 import UIKit
 
 protocol PushReminderViewControllerDelegate {
-    func passDataPushView(result: [String],title: String)
+    func passDataPushView(result: [String],title: [String],radio: [Bool])
 }
 
 class PushReminderViewController: UIViewController, ReminderViewControllerDelegate {
     
     var delegate: PushReminderViewControllerDelegate? = nil
-    var descriptionPushView: [String] = []
+    var mainDescription: [String] = []
+    var titleArray: [String] = []
+    var radioButton: [Bool] = []
+    var selectedTitle: String?
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier=="sbPushSegue"{
             let reminderVC: ReminderViewController = segue.destinationViewController as! ReminderViewController
+            reminderVC.descriptionArray = self.mainDescription
+            reminderVC.selectedTitle=self.selectedTitle
+            reminderVC.titleText = self.titleArray
+            reminderVC.radioButtonArray = self.radioButton
+            reminderVC.numberOfRows=self.mainDescription.count
             reminderVC.delegate = self
         }
     }
     
-    func passData(content: [String], title: String) {
-        descriptionPushView = content
-        delegate?.passDataPushView(descriptionPushView,title: title)
+    // Delegates
+    func passData(content: [String], title: [String],radio: [Bool]) {
+        mainDescription = content
+        titleArray = title
+        radioButton = radio
+        delegate?.passDataPushView(mainDescription,title: titleArray,radio: radioButton)
     }
 }
 

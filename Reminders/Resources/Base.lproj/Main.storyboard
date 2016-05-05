@@ -243,6 +243,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="buttonImage" destination="V0J-my-rRg" id="MtR-xY-WPq"/>
                                             <outlet property="txtDescription" destination="f94-zV-1sh" id="Wuz-sC-TDi"/>
                                         </connections>
                                     </tableViewCell>
