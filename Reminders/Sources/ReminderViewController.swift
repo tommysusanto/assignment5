@@ -1,7 +1,7 @@
 //  Copyright © 2016 HB. All rights reserved.
 protocol ReminderViewControllerDelegate
 {
-    func passData(reminder: [Reminder])
+    func passData(reminder: Reminder)
 }
 
 class ReminderViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -13,7 +13,7 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
   let addTaskTableViewCellIdentifier = "AddTaskTableViewCell"
     var delegate: ReminderViewControllerDelegate?
     
-    var reminderArray: Reminder = []
+    var reminder: Reminder?
     
     var descriptionArray: [String] = []
     var titleText: [String] = []
@@ -77,17 +77,16 @@ class ReminderViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidDisappear(animated: Bool) {
         //let cells = tasksTableView.visibleCells as! Array<TaskTableViewCell>
-        
+        var taskTempArray: [Task] = []
         for cell in tasksTableView.visibleCells {
-            var taskTempArray: [Task] = []
             if let cellTemp = cell as? TaskTableViewCell{
                 let taskTemp: Task = Task (completed: cellTemp.completed, description: cellTemp.txtDescription.text!)
                 taskTempArray.append(taskTemp)
             }
         }
-        let reminderTemp:Reminder = Reminder(title: titleTextField.text!, tasks: taskTempArray)
+        reminder = Reminder(title: titleTextField.text!, tasks: taskTempArray)
         if titleText.count != 0 && descriptionArray.count != 0 {
-            delegate?.passData(reminderArray)
+            delegate?.passData(reminder!)
         }
     }
 }
